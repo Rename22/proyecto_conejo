@@ -89,13 +89,8 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                     <a href="registro.php" class="nav-item nav-link ">Registros</a>
-<<<<<<< HEAD
                     <a href="price.html" class="nav-item nav-link">Estadistica</a>
                     <a href="videos.html" class="nav-item nav-link">Videos</a>
-=======
-                    <a href="estadistico.html" class="nav-item nav-link">Estadistica</a>
-                    <a href="booking.html" class="nav-item nav-link">Videos</a>
->>>>>>> 08d2566fffe8d6769eec40f32a1591bb3e66daec
                     <a href="blog.html" class="nav-item nav-link ">Bitacora   </a>
                     <a href="contact.html" class="nav-item nav-link">Contactanos</a>
                 </div>
