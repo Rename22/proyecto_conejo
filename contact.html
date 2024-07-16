@@ -123,7 +123,8 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>
-                            <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">Send Message</button>
+                            <button class="btn btn-primary py-3 px-5" type="button" id="sendMessageButton">Enviar Mensaje</button>
+
                         </div>
                     </form>
                 </div>
@@ -134,7 +135,25 @@
         </div>
     </div>
     <!-- Contact End -->
-
+    <script>
+        document.getElementById('sendMessageButton').addEventListener('click', function() {
+            // Obtener los valores del formulario
+            var raza = document.getElementById('name').value;
+            var genero = document.getElementById('gener').value;
+            var fechaNacimiento = document.getElementById('fecha').value;
+            var color = document.getElementById('color').value;
+            var mensaje = document.getElementById('message').value;
+    
+            // Construir el enlace de WhatsApp con los datos del formulario
+            var telefono = 593980551221; // Reemplazar con tu número de teléfono de WhatsApp
+            var mensajeWhatsApp = encodeURIComponent(`Raza: ${raza}%0AGénero: ${genero}%0AFecha de nacimiento: ${fechaNacimiento}%0AColor: ${color}%0AMensaje: ${mensaje}`);
+            var url = `https://wa.me/${telefono}?text=${mensajeWhatsApp}`;
+    
+            // Redirigir al usuario a WhatsApp
+            window.location.href = url;
+        });
+    </script>
+    
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white py-5 px-sm-3 px-md-5">
