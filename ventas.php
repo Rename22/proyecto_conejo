@@ -21,7 +21,7 @@ $result = $conn->query($sql);
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -35,12 +35,13 @@ $result = $conn->query($sql);
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        
         <div class="row py-3 px-lg-5">
             <div class="col-lg-4">
                 <a href="" class="navbar-brand d-none d-lg-block">
@@ -93,7 +94,6 @@ $result = $conn->query($sql);
                     <a href="blog.html" class="nav-item nav-link ">Bitacora   </a>
                     <a href="contact.html" class="nav-item nav-link">Contactanos</a>
                 </div>
-                
             </div>
         </nav>
     </div>
@@ -103,9 +103,13 @@ $result = $conn->query($sql);
         <button type="button" class="btn btn-primary" onclick="window.location.href='registro_ventas.php'">
             Registro de Ventas
         </button>
+        <br>
+        <br>
+        <!-- Campo de búsqueda -->
+        <input type="text" id="searchInput" class="form-control w-75 light-table-filter" data-table="order-table" placeholder="Buscar conejos...">
 
         <h2 class="mt-5">Lista de Conejos</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered order-table" id="conejosTable">
             <thead>
                 <tr>
                     <th>Raza</th>
@@ -202,11 +206,8 @@ $result = $conn->query($sql);
         </div>
     </div>
 
-
-   
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -221,7 +222,6 @@ $result = $conn->query($sql);
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
 
-                
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
@@ -255,6 +255,14 @@ $result = $conn->query($sql);
                 });
                 history.replaceState(null, null, window.location.pathname); // Eliminar el parámetro de la URL
             }
+
+            // Función de búsqueda en tiempo real
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#conejosTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
         });
     </script>
 </body>

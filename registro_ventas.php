@@ -38,7 +38,6 @@ $result = $conn->query($sql);
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        
         <div class="row py-3 px-lg-5">
             <div class="col-lg-4">
                 <a href="" class="navbar-brand d-none d-lg-block">
@@ -65,7 +64,6 @@ $result = $conn->query($sql);
     </div>
     <!-- Topbar End -->
 
-
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
@@ -88,17 +86,22 @@ $result = $conn->query($sql);
                     <a href="registro.php" class="nav-item nav-link ">Registros</a>
                     <a href="price.html" class="nav-item nav-link">Estadistica</a>
                     <a href="booking.html" class="nav-item nav-link">Videos</a>
-                    <a href="blog.html" class="nav-item nav-link ">Bitacora   </a>
+                    <a href="blog.html" class="nav-item nav-link ">Bitacora</a>
                     <a href="contact.html" class="nav-item nav-link">Contactanos</a>
                 </div>
-                
             </div>
         </nav>
     </div>
     <!-- Navbar End -->
+
     <div class="container mt-5">
         <h2 class="mt-5">Conejos Vendidos</h2>
-        <table class="table table-bordered">
+        
+        <!-- Campo de búsqueda -->
+        <input type="text" id="searchInput" class="form-control w-75 light-table-filter" data-table="order-table" placeholder="Buscar ventas...">
+        <br>
+        <br>
+        <table class="table table-bordered order-table" id="ventasTable">
             <thead>
                 <tr>
                     <th>Raza</th>
@@ -120,7 +123,8 @@ $result = $conn->query($sql);
                             <td>{$row['fecha_nac']}</td>
                             <td>{$row['color']}</td>
                             <td>{$row['peso']} kg</td>
-                            <td>{$row['precio']}</td>
+                            <td>\${$row['precio']}</td>
+
                             <td>{$row['fecha_venta']}</td>
                         </tr>";
                     }
@@ -150,5 +154,17 @@ $result = $conn->query($sql);
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Función de búsqueda en tiempo real
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#ventasTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
