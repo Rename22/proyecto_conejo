@@ -3,7 +3,7 @@
 include 'conexion.php';
 
 // Insertar nuevo conejo
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $raza = $_POST['raza'];
     $genero = $_POST['genero'];
     $fecha_nac = $_POST['fecha_nac'];
@@ -18,7 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$raza', '$genero', '$fecha_nac', '$historial_me', '$vacunas', '$color', $peso, '$observacion', '$estado')";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: registro.php");
+        header("Location: registro.php?action=registered");
+        exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -28,8 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $sql = "SELECT * FROM conejos";
 $result = $conn->query($sql);
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +44,7 @@ $result = $conn->query($sql);
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -59,30 +58,13 @@ $result = $conn->query($sql);
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    <style>
-        .zoom-button {
-            transition: transform 0.2s;
-        }
-        .zoom-button:hover {
-            transform: scale(1.1);
-        }
-        .badge-success {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .badge-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-
-    </style>
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        
         <div class="row py-3 px-lg-5">
             <div class="col-lg-4">
                 <a href="" class="navbar-brand d-none d-lg-block">
@@ -109,7 +91,6 @@ $result = $conn->query($sql);
     </div>
     <!-- Topbar End -->
 
-
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
@@ -122,30 +103,37 @@ $result = $conn->query($sql);
             <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
                     <a href="index.html" class="nav-item nav-link ">Crianza</a>
-                    <a href="about.html" class="nav-item nav-link">Ventas</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">Ventas</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="ventas.php" class="dropdown-item">Vender</a>
+                            <a href="registro_ventas.php" class="dropdown-item">Registro de ventas</a>
+                        </div>
+                    </div>
                     <a href="registro.php" class="nav-item nav-link active">Registros</a>
                     <a href="price.html" class="nav-item nav-link">Estadistica</a>
                     <a href="booking.html" class="nav-item nav-link">Videos</a>
-                    <a href="booking.html" class="nav-item nav-link">Bitacora   </a>
+                    <a href="blog.html" class="nav-item nav-link ">Bitacora</a>
                     <a href="contact.html" class="nav-item nav-link">Contactanos</a>
                 </div>
-                
             </div>
         </nav>
     </div>
     <!-- Navbar End -->
 
-
-   
-     <!-- Pagina principal -->
+    <!-- Pagina principal -->
     <div class="container mt-5">
-         <!-- Botón de Registro -->
+        <!-- Botón de Registro -->
         <button type="button" class="btn btn-primary zoom-button" data-toggle="modal" data-target="#registerModal">
             Registrar Conejo
         </button>
+        <br>
+        <br>
+        <!-- Campo de búsqueda -->
+        <input type="text" id="searchInput" class="form-control w-75 light-table-filter" data-table="order-table" placeholder="Buscar conejos...">
 
         <h2 class="mt-5">Lista de Conejos</h2>
-        <table class="table table-bordered">
+        <table class="table table-bordered order-table" id="conejosTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -164,7 +152,7 @@ $result = $conn->query($sql);
             <tbody>
                 <?php
                 if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+                    while ($row = $result->fetch_assoc()) {
                         $estadoClass = $row['estado'] == 'Disponible' ? 'badge badge-success' : 'badge badge-danger';
                         echo "<tr>
                             <td>{$row['id']}</td>
@@ -177,30 +165,24 @@ $result = $conn->query($sql);
                             <td>{$row['peso']} kg</td>
                             <td>{$row['observacion']}</td>
                             <td><span class='{$estadoClass}'>{$row['estado']}</span></td>
-                            <td>
-                                <div class='btn-group' role='group'>
+                            <td>";
+                        if ($row['estado'] == 'Disponible') {
+                            echo "<div class='btn-group' role='group'>
                                     <button class='btn btn-warning btn-sm mr-2 zoom-button' data-toggle='modal' data-target='#editModal' 
                                             data-id='{$row['id']}' data-raza='{$row['raza']}' data-genero='{$row['genero']}'
                                             data-fecha_nac='{$row['fecha_nac']}' data-historial_me='{$row['historial_me']}'
                                             data-vacunas='{$row['vacunas']}' data-color='{$row['color']}'
                                             data-peso='{$row['peso']}' data-observacion='{$row['observacion']}'>Editar</button>
                                     <a href='eliminar.php?id={$row['id']}' class='btn btn-danger btn-sm zoom-button'>Eliminar</a>
-                                </div>
-                            </td>
-                        </tr>";
+                                  </div>";
+                        }
+                        echo "</td></tr>";
                     }
                 } else {
                     echo "<tr><td colspan='11'>No hay conejos registrados</td></tr>";
                 }
                 ?>
             </tbody>
-
-
-
-
-
-
-                
         </table>
     </div>
 
@@ -216,6 +198,7 @@ $result = $conn->query($sql);
                 </div>
                 <div class="modal-body">
                     <form id="registerForm" method="post" action="registro.php">
+                        <input type="hidden" name="register" value="1">
                         <!-- Campos del formulario -->
                         <div class="form-group">
                             <label for="raza">Raza</label>
@@ -258,7 +241,7 @@ $result = $conn->query($sql);
             </div>
         </div>
     </div>
-     
+
     <!-- Modal de Edición -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -317,7 +300,6 @@ $result = $conn->query($sql);
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
@@ -331,9 +313,49 @@ $result = $conn->query($sql);
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.has('action')) {
+                const action = urlParams.get('action');
+
+                if (action === 'registered') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Registrado con éxito!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else if (action === 'edited') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Editado con éxito!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else if (action === 'deleted') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Eliminado con éxito!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+
+                history.replaceState(null, null, window.location.pathname); // Eliminar el parámetro de la URL
+            }
+
+            // Función de búsqueda en tiempo real
+            $("#searchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#conejosTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+
         $('#editModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var id = button.data('id');
