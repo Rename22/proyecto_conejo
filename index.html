@@ -81,11 +81,7 @@
                     <a href="registro.php" class="nav-item nav-link">Registros</a>
                     <a href="price.html" class="nav-item nav-link">Estadistica</a>
                     <a href="booking.html" class="nav-item nav-link">Videos</a>
-
-                    
-
-                    <a href="bitacora.html" class="nav-item nav-link">Bitacora   </a>
-
+                    <a href="bitacora.html" class="nav-item nav-link">Bitácora   </a>
                     <a href="contact.html" class="nav-item nav-link">Contactanos</a>
                     
                 </div>
@@ -140,11 +136,37 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
-                    <!-- Contenedor para la imagen -->
-                    <div class="bg-primary py-5 px-4 px-sm-5 text-center">
-                        <div class="image-container">
-                            <img src="img/Flemish Giant Arena.jfif" class="img-fluid square-image" alt="Imagen Cuadrada">
-                        </div>
+                    <div class="bg-primary py-5 px-4 px-sm-5">
+                        <form class="py-5">
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 p-4" placeholder="Your Name" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 p-4" placeholder="Your Email" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <div class="date" id="date" data-target-input="nearest">
+                                    <input type="text" class="form-control border-0 p-4 datetimepicker-input" placeholder="Reservation Date" data-target="#date" data-toggle="datetimepicker"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="time" id="time" data-target-input="nearest">
+                                    <input type="text" class="form-control border-0 p-4 datetimepicker-input" placeholder="Reservation Time" data-target="#time" data-toggle="datetimepicker"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select class="custom-select border-0 px-4" style="height: 47px;">
+                                    <option selected>Select A Service</option>
+                                    <option value="1">Service 1</option>
+                                    <option value="2">Service 1</option>
+                                    <option value="3">Service 1</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn btn-dark btn-block border-0 py-3" type="submit">Book Now</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-lg-7 py-5 py-lg-0 px-3 px-lg-5">
                     <h1 class="display-4 mb-4">GUÍA<span class="text-primary"> CONEJERA</span></h1>
