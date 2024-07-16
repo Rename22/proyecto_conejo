@@ -55,7 +55,7 @@
         </div>
     </div>
     <!-- Topbar End -->
-
+    
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
@@ -85,6 +85,7 @@
         </nav>
     </div>
     <!-- Navbar End -->
+    
 
     <!-- Rabbit Details Start -->
     <div class="container-fluid bg-white py-5">
@@ -180,65 +181,87 @@
     </div>
     <!-- Rabbit Details End -->
 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Estadísticas de Visitas</title>
+        
+        <style>
+           
+            .container {
+                margin-top: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Contenido del sitio -->
+        <div class="container">
+            <h1 class="text-center">Estadísticas de Visitas</h1>
+            <p id="visit-count" class="text-center">Número de visitas: 0</p>
+        </div>
+    
+        <!-- JavaScript para mostrar el contador -->
+        <script>
+            // Obtener el conteo de visitas almacenado en localStorage
+            let visitCount = localStorage.getItem('visitCount');
+    
+            // Mostrar el conteo de visitas en la página
+            document.getElementById('visit-count').innerText = 'Número de visitas: ' + visitCount;
+        </script>
+    
+
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Get In Touch</h4>
-                <p><i class="fa fa-map-marker-alt text-primary mr-2"></i>123 Street, New York, USA</p>
-                <p><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-                <p><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                <div class="d-flex justify-content-start mt-4">
-                    <a class="btn btn-outline-light btn-social mr-2"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-light btn-social mr-2"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light btn-social mr-2"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-outline-light btn-social"><i class="fab fa-instagram"></i></a>
-                </div>
+            <div class="col-lg-4 col-md-12 mb-5">
+                <h1 class="mb-3 display-5 text-capitalize text-white"><span class="text-primary">Bugs</span>Bunny</h1>
+                <p class="m-0">En "Bugs Bunny", nuestra misión es criar y proporcionar conejos de alta calidad, saludables y bien cuidados, tanto como mascotas cariñosas como para fines de exhibición.
+                    Nos comprometemos a mantener estándares éticos y de bienestar animal en todas nuestras prácticas de cría y cuidado.</p>
             </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Quick Links</h4>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Services</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Pricing</a>
-                    <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact</a>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-primary mb-4">Ponte en Contacto</h5>
+                        <p><i class="fa fa-map-marker-alt mr-2"></i>Latacaunga, San Felipe</p>
+                        <p><i class="fa fa-phone-alt mr-2"></i>0985632578</p>
+                        <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+                        <div class="d-flex justify-content-start mt-4">
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-primary mb-4">Accesos</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-white mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Crianza</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Ventas</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Registros</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Estadisticas</a>
+                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Videos</a>
+                            <a class="text-white mb-2" href="bitacora.html"><i class="fa fa-angle-right mr-2"></i>Bitácora</a>
+                            <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contactanos</a>
+                        </div>
+                    </div>
+                    
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Popular Links</h4>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Meet The Team</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Latest Blog</a>
-                    <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-primary mb-4">Newsletter</h4>
-                <form action="">
-                    <div class="form-group">
-                        <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control border-0 py-4" placeholder="Your Email" required="required" />
-                    </div>
-                    <div>
-                        <button class="btn btn-primary btn-block border-0 py-3" type="submit">Submit Now</button>
-                    </div>
-                </form>
             </div>
         </div>
-        <div class="container-fluid pt-5" style="border-top: 1px solid rgba(23, 162, 184, .2);;">
-            <p class="m-0 text-center text-white">
-                &copy; <a class="text-primary font-weight-bold" href="#">BugsBunny</a>. All Rights Reserved. Designed by <a class="text-primary font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
-            </p>
+    </div>
+    <div class="container-fluid text-white py-4 px-sm-3 px-md-5" style="background: #111111;">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
+                <p class="m-0 text-white">
+                    &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed by
+                    <a class="text-white font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
+                </p>
+            </div>
+            
+            </div>
         </div>
     </div>
     <!-- Footer End -->
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-outline-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
