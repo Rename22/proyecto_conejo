@@ -111,9 +111,9 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                     <a href="registro.php" class="nav-item nav-link active">Registros</a>
-                    <a href="price.html" class="nav-item nav-link">Estadistica</a>
+                    <a href="estadistico.html" class="nav-item nav-link">Estadistica</a>
                     <a href="videos.html" class="nav-item nav-link">Videos</a>
-                    <a href="blog.html" class="nav-item nav-link ">Bitacora</a>
+                    <a href="bitacora.html" class="nav-item nav-link ">Bitácora</a>
                     <a href="contact.html" class="nav-item nav-link">Contactanos</a>
                 </div>
             </div>
