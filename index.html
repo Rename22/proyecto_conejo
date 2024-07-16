@@ -27,7 +27,25 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
+ <!-- JavaScript para el contador -->
+ <script>
+    // Obtener el conteo de visitas almacenado en localStorage
+    let visitCount = localStorage.getItem('visitCount');
 
+    // Si no hay conteo de visitas, inicializarlo en 0
+    if (visitCount === null) {
+        visitCount = 0;
+    } else {
+        // Incrementar el conteo de visitas
+        visitCount = parseInt(visitCount) + 1;
+    }
+
+    // Almacenar el nuevo conteo de visitas en localStorage
+    localStorage.setItem('visitCount', visitCount);
+
+    // Mostrar el conteo de visitas en la página
+    document.getElementById('visit-count').innerText = 'Número de visitas: ' + visitCount;
+</script>
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
@@ -79,7 +97,7 @@
                         </div>
                     </div>
                     <a href="registro.php" class="nav-item nav-link">Registros</a>
-                    <a href="price.html" class="nav-item nav-link">Estadistica</a>
+                    <a href="estadistico.html" class="nav-item nav-link">Estadistica</a>
                     <a href="booking.html" class="nav-item nav-link">Videos</a>
                     <a href="bitacora.html" class="nav-item nav-link">Bitácora   </a>
                     <a href="contact.html" class="nav-item nav-link">Contactanos</a>
