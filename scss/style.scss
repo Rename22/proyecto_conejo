@@ -162,3 +162,65 @@ h6 {
     padding: 0;
     list-style-type: none;
 }
+
+// Variables comunes
+$primary-color: #4e73df;
+$secondary-color: #1cc88a;
+$tertiary-color: #36b9cc;
+
+// Conejo Holandés
+$conejo1-bg-color: $primary-color;
+$conejo1-text-color: #fff;
+
+// Conejo Californiano
+$conejo2-bg-color: $secondary-color;
+$conejo2-text-color: #fff;
+
+// Conejo Rex
+$conejo3-bg-color: $tertiary-color;
+$conejo3-text-color: #fff;
+
+// Conejo Angora
+$conejo4-bg-color: lighten($primary-color, 20%);
+$conejo4-text-color: #fff;
+
+// Conejo Lop
+$conejo5-bg-color: lighten($secondary-color, 20%);
+$conejo5-text-color: #fff;
+
+.rabbit-card {
+    margin-bottom: 1.5rem;
+  
+    &.data-rabbit-conejo1 {
+      background-color: $conejo1-bg-color;
+      color: $conejo1-text-color;
+    }
+  
+    &.data-rabbit-conejo2 {
+      background-color: $conejo2-bg-color;
+      color: $conejo2-text-color;
+    }
+  
+    &.data-rabbit-conejo3 {
+      background-color: $conejo3-bg-color;
+      color: $conejo3-text-color;
+    }
+  
+    &.data-rabbit-conejo4 {
+      background-color: $conejo4-bg-color;
+      color: $conejo4-text-color;
+    }
+  
+    &.data-rabbit-conejo5 {
+      background-color: $conejo5-bg-color;
+      color: $conejo5-text-color;
+    }
+  }
+  
+
+#rabbitChartContainer {
+    background-color: #f8f9fc;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58,59,69,0.15);
+}
