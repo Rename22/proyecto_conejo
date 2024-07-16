@@ -314,6 +314,8 @@ $result = $conn->query($sql);
     <script src="mail/contact.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
     <script>
         $(document).ready(function() {
             const urlParams = new URLSearchParams(window.location.search);
